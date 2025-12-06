@@ -12,8 +12,9 @@ local tbl= {
     items = {
         jokers = {
             proposals = {
+                "code_name_dr_mann",
                 "code_name_wjs",
-                "code_name_lily"
+                "code_name_lily",
             }
         }
     }

@@ -40,6 +40,27 @@ return {
                     }
                 }
             },
+            j_scp_code_name_dr_mann = {
+                name = {
+                    "CODE NAME: Dr. Mann",
+                    "{C:red,s:0.8}The Spiral Path"
+                },
+                text = {
+                    {
+                        "{s:0.9}Item {E:scp_hash}1{s:0.8}: SCP-001",
+                        "{s:0.9}Object Class{s:0.8}: Embla",
+                        "{s:0.9}Special Containment Procedures:",
+                        "{s:0.8}SCP-001 is contained on the grounds of",
+                        "{s:0.8}Site 0 in upstate {X:black,C:black,s:0.8}[REDACTED].{}",
+                        "{s:0.9}Description:",
+                    },
+                    {
+                        "{C:attention}Rescore{} all scored cards",
+                        "once for every {C:attention}previous{}",
+                        "card in scored hand"
+                    }
+                }
+            },
         },
         Spectral = {
             c_familiar_nodownside = {
