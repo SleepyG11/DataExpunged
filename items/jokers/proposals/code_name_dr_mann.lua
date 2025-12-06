@@ -13,9 +13,9 @@ SMODS.Joker {
     classification = "proposal",
 
     calculate = function(self, card, context)
-        if context.scoring_cards_check then
+        if context.add_scoring_cards_check then
             local cards = {}
-            for j = 1, #context.scoring_hand do
+            for j = 2, #context.scoring_hand do
                 for i, v in pairs(context.scoring_hand) do
                     if j <= i then
                         cards[#cards+1] = v
@@ -31,7 +31,8 @@ SMODS.Joker {
 
 local calc_main_scoring = SMODS.calculate_main_scoring
 function SMODS.calculate_main_scoring(context, scoring_hand)
-    local cards = SCP.get_scored_cards(context.scoring_hand)
+    local cards, messages = SCP.get_scored_cards(context.scoring_hand)
+    G.rescore_messages = messages or {}
     if context.cardarea ~= G.play or not cards then
 	    calc_main_scoring(context, context.scoring_hand)
     end
@@ -49,16 +50,32 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
 end
 
 function SCP.get_scored_cards(scored_cards)
+    local messages = {}
     local cards 
+    local first = true
     for i, v in pairs(SMODS.get_card_areas("jokers")) do
         for _, card in pairs(v.cards) do
-            local ret = card.config.center.calculate and card.config.center:calculate(card, {scoring_cards_check = true, scoring_hand = scored_cards})
-            print(ret)
+            local ret = card:calculate_joker({set_scoring_cards_check = true, scoring_hand = scored_cards, first = first})
             if ret and ret.scoring_hand then
                 cards = cards or {}
                 SCP.merge_tables(cards, ret.scoring_hand)
             end
+
+            local ret2 = card:calculate_joker({add_scoring_cards_check = true, scoring_hand = scored_cards, first = first})
+            first = false
+            if ret2 and ret2.scoring_hand then
+                if not cards then
+                    cards = {}
+                    for i, v in pairs(scored_cards) do 
+                        cards[#cards+1] = v 
+                    end
+                end
+                for i, v in pairs(ret2.scoring_hand) do
+                    cards[#cards+1] = v 
+                    messages[#cards] = {message = ret2.message or localize("k_rescore_ex"), colour = ret2.colour or G.C.PURPLE}
+                end
+            end
         end
     end
-    return cards
+    return cards, messages
 end

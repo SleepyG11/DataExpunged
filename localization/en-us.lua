@@ -137,7 +137,9 @@ return {
             k_scp_keter = "Keter",
             k_scp_archon = "Archon",
             k_scp_thaumiel = "Thaumiel",
-            k_scp_apollyon = "Apollyon"
+            k_scp_apollyon = "Apollyon",
+
+            k_rescore_ex = "Again!?"
         }
     }
 }

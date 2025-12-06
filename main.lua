@@ -8,6 +8,7 @@ local tbl= {
     lib = {
         "misc",
         "take_ownership",
+        "calculation_keys"
     },
     items = {
         jokers = {
