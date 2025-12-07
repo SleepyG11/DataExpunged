@@ -3,7 +3,7 @@ version = "1.0.0"
 dump_lua = true
 priority = 0
 
-# get_badge_colour
+# win on any ante past win ante
 [[patches]]
 [patches.pattern]
 target = '''functions/state_events.lua'''
