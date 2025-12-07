@@ -26,7 +26,7 @@ SMODS.Joker {
         if context.end_of_round and context.main_eval then
             local jokers = G.jokers.cards
             for i = 1, #jokers do
-                if jokers[i] then
+                if jokers[i] == card then
                     local joker_to_fucking_kill_oh_my_god = jokers[i-1]
                     if joker_to_fucking_kill_oh_my_god then
                         local rarity = joker_to_fucking_kill_oh_my_god.config.center.rarity
