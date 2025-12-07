@@ -23,3 +23,85 @@ Game.main_menu = function(change_context)
     })
     return ret
 end
+
+local function wrapText(text, maxChars)
+    local wrappedText = {""}
+    local curr_line = 1
+    local currentLineLength = 0
+
+    for word in text:gmatch("%S+") do
+        if currentLineLength + #word <= maxChars then
+            wrappedText[curr_line] = wrappedText[curr_line] .. word .. ' '
+            currentLineLength = currentLineLength + #word + 1
+        else
+            wrappedText[curr_line] = string.sub(wrappedText[curr_line], 0, -2)
+            curr_line = curr_line + 1
+            wrappedText[curr_line] = ""
+            wrappedText[curr_line] = wrappedText[curr_line] .. word .. ' '
+            currentLineLength = #word + 1
+        end
+    end
+
+    wrappedText[curr_line] = string.sub(wrappedText[curr_line], 0, -2)
+    return wrappedText
+end
+
+SCP.extra_tabs = function(page)
+    local _needed_pages = 1
+    local mod = SCP
+    G.E_MANAGER:add_event(Event({
+        blockable = false,
+        func = function()
+            G.REFRESH_ALERTS = nil
+            return true
+        end
+    }))
+    if not G.SCP_CREDITS_PAGE then G.SCP_CREDITS_PAGE = 1 end
+    if page then G.SCP_CREDITS_PAGE = page end
+    local label = localize("k_credits")
+
+    local opts = {}
+    for i = 1, _needed_pages do
+        table.insert(opts, localize('k_page')..' '..tostring(i)..'/'..tostring(_needed_pages))
+    end
+
+    return {
+        label = label,
+        chosen = SMODS.LAST_SELECTED_MOD_TAB == "DataExpunged_1" or false,
+        tab_definition_function = function()
+            local modNodes = {}
+            local scale = 0.75 -- Scale factor for text
+            local maxCharsPerLine = 50
+
+            -- Mod description
+            modNodes[#modNodes + 1] = {}
+            local loc_vars = mod.description_loc_vars and mod:description_loc_vars() or {}
+            localize { type = 'descriptions', key = "DataExpunged_credits_"..(G.SCP_CREDITS_PAGE), set = 'Mod', nodes = modNodes[#modNodes], vars = loc_vars.vars, scale = loc_vars.scale, text_colour = loc_vars.text_colour, shadow = loc_vars.shadow }
+            modNodes[#modNodes] = desc_from_rows(modNodes[#modNodes])
+            modNodes[#modNodes].config.colour = loc_vars.background_colour or modNodes[#modNodes].config.colour
+            modNodes[#modNodes].config.minh = 6
+            modNodes[#modNodes+1] = create_option_cycle({options = opts, w = 4.5, cycle_shoulders = true, opt_callback = 'SCP_cycle_credits', focus_args = {snap_to = true, nav = 'wide'},current_option = G.SCP_CREDITS_PAGE, colour = G.C.BLACK, no_pips = true})
+            return {
+                n = G.UIT.ROOT,
+                config = {
+                    emboss = 0.05,
+                    minh = 6,
+                    r = 0.1,
+                    minw = 6,
+                    align = "tm",
+                    padding = 0.2,
+                    colour = G.C.BLACK
+                },
+                nodes = modNodes
+            }
+        end
+    }
+end
+
+G.FUNCS.SCP_cycle_credits = function(args)
+    if not args or not args.cycle_config then return end    
+    G.SCP_CREDITS_PAGE = args.cycle_config.current_option
+    G.FUNCS.overlay_menu({
+        definition = create_UIBox_mods(e)
+    })
+end

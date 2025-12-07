@@ -249,7 +249,19 @@ return {
                     "adding Jokers based around many SCPs and various other cards and mechanics",
                     "{C:inactive,s:0.9}For Authors see Credits page"
                 }
-            }
+            },
+            DataExpunged_credits_1 = {
+                name = "Credits",
+                text = {
+                    "{C:red}WELCOME TO THE SCP FOUNDATION{}",
+                    "{C:red,s:2}CONTRIBUTOR PAGE REPOSITORY{}",
+                    " ",
+                    " ",
+                    "{C:red,s:1.5}lord.ruby{s:1.5}: {C:red}Lead Dev{}, {C:red}Artist{}, {C:red}Programmer",
+                    "{C:red,s:1.5}SleepyG11{s:1.5}: {C:red}Programmer",
+                    "{C:red,s:1.5}Soulware{s:1.5}: {C:red}Programmer",
+                }
+            },
         }
     },
     misc = {
@@ -268,7 +280,11 @@ return {
             k_scp_junk = "Junk",
             
             k_scp_914_processed = "Proccessed",
-            k_rescore_ex = "Again!?"
+            k_rescore_ex = "Again!?",
+
+            k_credits = "Credits",
+            k_contributors_1 = "WELCOME TO THE SCP FOUNDATION",
+            k_contributors_2 = "CONTRIBUTOR PAGE REPOSITORY"
         }
     }
 }
