@@ -9,7 +9,8 @@ local tbl= {
         "atlases",
         "misc",
         "take_ownership",
-        "calculation_keys"
+        "calculation_keys",
+        "config"
     },
     items = {
         jokers = {

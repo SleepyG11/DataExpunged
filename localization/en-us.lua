@@ -181,6 +181,30 @@ return {
                     "random {C:attention}Joker{}"
                 }
             },
+        },
+        Mod = {
+            DataExpunged = {
+                name = "{C:black,X:black}[DATA EXPUNGED]{}",
+                text = {
+                    "THE FOLLOWING FILES HAVE BEEN CLASSIFIED",
+                    "{C:red,s:2}TOP SECRET{}",
+                    "BY ORDER OF THE ADMINISTRATOR",
+                    " ",
+                    " ",
+                    " ",
+                    "{C:red,s:2}WARNING:{}",
+                    "ANY NON-AUTHORIZED PERSONNEL ACCESSING THIS FILE WILL BE IMMEDIATELY TERMINATED",
+                    "THROUGH BERRYMAN-LANGFORD MEMETIC KILL AGENT. READING FURTHER WITHOUT PROPER",
+                    "MEMETIC INOCULATION WILL RESULT IN IMMEDIATE CARDIAC ARREST FOLLOWED BY DEATH.",
+                    "{C:red,s:2}YOU HAVE BEEN WARNED.",
+                    " ",
+                    " ",
+                    " ",
+                    "SCP-{C:black,X:black}XXXX{} is a Balatro Mod themed around The SCP Foundation",
+                    "adding Jokers based around many SCPs and various other cards and mechanics",
+                    "{C:inactive,s:0.9}For Authors see Credits page"
+                }
+            }
         }
     },
     misc = {
